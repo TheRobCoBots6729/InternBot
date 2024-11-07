@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class tank extends SubsystemBase {
   /** Creates a new tank. */
   public tank() {
-    left1 = new Spark;
-    left2 = new Spark;
-    right1 = new Spark;
-    right2 = new Spark;
+    left1 = new Spark(channel:0);
+    left2 = new Spark(channel:1);
+    right1 = new Spark(channel:2);
+    right2 = new Spark(channel:3);
   }
 
   @Override
