@@ -5,10 +5,13 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.tankdrive;
+import frc.robot.subsystems.tank;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -18,15 +21,30 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // Subsystems
+  private final tank t_tank = new tank();
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  // Controller(s)
+  private final Joystick m_driverController =
+      new Joystick(OperatorConstants.kDriverControllerPort);
+
+  // Drive Controls
+  private final int leftSide = XboxController.Axis.kLeftY.value;
+  private final int rightSide = XboxController.Axis.kRightY.value;
+
+  // Mechanism Controls
+  private final JoystickButton shoot = new JoystickButton(m_driverController, XboxController.Button.kY.value);
+  private final JoystickButton intake = new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value);
+  private final JoystickButton outtake = new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    t_tank.setDefaultCommand(
+      new tankdrive(
+        t_tank, 
+        () -> leftSide, 
+        () -> rightSide)
+    );
     // Configure the trigger bindings
     configureBindings();
   }
@@ -55,6 +73,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return null;
   }
 }

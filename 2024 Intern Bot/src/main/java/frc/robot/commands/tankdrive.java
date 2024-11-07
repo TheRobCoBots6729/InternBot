@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.tank;
 
@@ -12,9 +13,16 @@ public class tankdrive extends Command {
   DoubleSupplier a;
   DoubleSupplier b;
   public tankdrive(tank t_tank, DoubleSupplier a, DoubleSupplier b) {
+<<<<<<< Updated upstream
     addRequirements(t_tank);
     this.a = a;
     this.b - b;
+=======
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(t_tank);
+    this.a = a;
+    this.b = b;
+>>>>>>> Stashed changes
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +34,11 @@ public class tankdrive extends Command {
   public void execute() {
     tank.left1.set(a.getAsDouble());
     tank.left2.set(a.getAsDouble());
+<<<<<<< Updated upstream
     tank.right1.set(-a.getAsDouble());
+=======
+    tank.right1.set(-b.getAsDouble());
+>>>>>>> Stashed changes
     tank.right2.set(-b.getAsDouble());
 
 
