@@ -9,9 +9,12 @@ import frc.robot.subsystems.tank;
 
 public class tankdrive extends Command {
   /** Creates a new tankdrive. */
-  public tankdrive() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    
+  DoubleSupplier a;
+  DoubleSupplier b;
+  public tankdrive(tank t_tank, DoubleSupplier a, DoubleSupplier b) {
+    addRequirements(t_tank);
+    this.a = a;
+    this.b - b;
   }
 
   // Called when the command is initially scheduled.
