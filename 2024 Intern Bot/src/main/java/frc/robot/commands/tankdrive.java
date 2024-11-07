@@ -21,10 +21,10 @@ public class tankdrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    tank.left1.set(leftSpeed);
-    tank.left2.set(leftSpeed);
-    tank.right1.set(rightSpeed);
-    tank.right2.set(rightSpeed);
+    tank.left1.set(a.getAsDouble());
+    tank.left2.set(a.getAsDouble());
+    tank.right1.set(-a.getAsDouble());
+    tank.right2.set(-b.getAsDouble());
 
 
   }
