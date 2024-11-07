@@ -4,5 +4,14 @@
 
 package frc.robot.subsystems;
 
-/** Add your docs here. */
-public class motorcontrollersC {}
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class tank extends SubsystemBase {
+  /** Creates a new tank. */
+  public tank() {}
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}
