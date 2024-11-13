@@ -6,6 +6,8 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.tankdrive;
+import frc.robot.subsystems.shooter;
+import frc.robot.commands.shoot_stuff;
 import frc.robot.subsystems.tank;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -23,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // Subsystems
   private final tank t_tank = new tank();
+  private final shooter s_shooter = new shooter();
 
   // Controller(s)
   private final Joystick m_driverController =
@@ -35,7 +38,6 @@ public class RobotContainer {
   // Mechanism Controls
   private final JoystickButton shoot = new JoystickButton(m_driverController, XboxController.Button.kY.value);
   private final JoystickButton intake = new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value);
-  private final JoystickButton outtake = new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -44,6 +46,13 @@ public class RobotContainer {
         t_tank, 
         () -> leftSide, 
         () -> rightSide)
+    );
+    s_shooter.setDefaultCommand(
+      new shoot_stuff(
+        s_shooter,
+        () -> shoot.getAsBoolean(),
+        () -> intake.getAsBoolean()
+      )
     );
     // Configure the trigger bindings
     configureBindings();

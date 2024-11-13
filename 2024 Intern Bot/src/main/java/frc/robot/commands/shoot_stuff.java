@@ -1,37 +1,38 @@
 package frc.robot.commands;
-
+import java.util.function.BooleanSupplier;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.shooter;
 
 public class shoot_stuff extends Command {
-    public shoot_stuff(shooter s_shooter, Boolean a, Boolean b)
+  BooleanSupplier a;
+  BooleanSupplier b;
+    public shoot_stuff(shooter s_shooter, BooleanSupplier a, BooleanSupplier b){
     
         addRequirements(s_shooter);
         this.a = a;
         this.b = b;
-    
+    }
     @Override
     public void initialize() {}
 
   @Override
   public void execute() {
-    if (shooter.a == true){
-    shooter.leftshooter.set(-0.1);
-    shooter.rightshooter.set(0.1);
+    if (a.getAsBoolean()){
+    shooter.leftshooter.set(ControlMode.PercentOutput, -0.1);
+    shooter.rightshooter.set(ControlMode.PercentOutput, 0.1);
     }
-    else if (shooter.b == true){
-    shooter.leftshooter.set(0.1);
-    shooter.rightshooter.set(-0.1);
+    else if (b.getAsBoolean()){
+    shooter.leftshooter.set(ControlMode.PercentOutput, 0.1);
+    shooter.rightshooter.set(ControlMode.PercentOutput, -0.1);
 
     }
     else{
-    shooter.leftshooter.set(0);
-    shooter.rightshooter.set(0);
+    shooter.leftshooter.set(ControlMode.PercentOutput, 0);
+    shooter.rightshooter.set(ControlMode.PercentOutput, 0);
     } 
     
   }
-
-
-
 
   @Override
   public void end(boolean interrupted) {}
@@ -40,6 +41,6 @@ public class shoot_stuff extends Command {
 
   @Override
   public boolean isFinished(){
-    return false; `
+    return false; 
   }
 }
