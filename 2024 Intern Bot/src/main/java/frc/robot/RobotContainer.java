@@ -10,7 +10,8 @@ import frc.robot.subsystems.shooter;
 import frc.robot.commands.shoot_stuff;
 import frc.robot.subsystems.tank;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PS4Controller;
+//import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -32,12 +33,12 @@ public class RobotContainer {
       new Joystick(OperatorConstants.kDriverControllerPort);
 
   // Drive Controls
-  private final int leftSide = XboxController.Axis.kLeftY.value;
-  private final int rightSide = XboxController.Axis.kRightY.value;
+  private final int leftSide = PS4Controller.Axis.kLeftY.value;
+  private final int rightSide = PS4Controller.Axis.kRightY.value;
 
   // Mechanism Controls
-  private final JoystickButton shoot = new JoystickButton(m_driverController, XboxController.Button.kY.value);
-  private final JoystickButton intake = new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value);
+  private final JoystickButton shoot = new JoystickButton(m_driverController, PS4Controller.Button.kTriangle.value);
+  private final JoystickButton intake = new JoystickButton(m_driverController, PS4Controller.Button.kR1.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
