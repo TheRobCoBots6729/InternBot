@@ -6,13 +6,18 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.tankdrive;
+import frc.robot.subsystems.conveyor;
 import frc.robot.subsystems.shooter;
+import frc.robot.commands.conveyorbelt;
 import frc.robot.commands.shoot_stuff;
 import frc.robot.subsystems.tank;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 //import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -27,6 +32,7 @@ public class RobotContainer {
   // Subsystems
   private final tank t_tank = new tank();
   private final shooter s_shooter = new shooter();
+  private final conveyor c_conveyor = new conveyor();
 
   // Controller(s)
   private final Joystick m_driverController =
@@ -38,7 +44,6 @@ public class RobotContainer {
 
   // Mechanism Controls
   private final JoystickButton shoot = new JoystickButton(m_driverController, PS4Controller.Button.kTriangle.value);
-  private final JoystickButton intake = new JoystickButton(m_driverController, PS4Controller.Button.kR1.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -48,12 +53,23 @@ public class RobotContainer {
         () -> leftSide, 
         () -> rightSide)
     );
-    s_shooter.setDefaultCommand(
-      new shoot_stuff(
-        s_shooter,
-        () -> shoot.getAsBoolean(),
-        () -> intake.getAsBoolean()
+    //s_shooter.setDefaultCommand(
+      //new shoot_stuff(
+        //s_shooter,
+        //() -> shoot.getAsBoolean(),
+        //() -> intake.getAsBoolean()
+      //)
+    //);
+    shoot.whileTrue(
+      new shoot_stuff(s_shooter).alongWith(
+        new SequentialCommandGroup(
+          Commands.waitSeconds(0.5), new conveyorbelt(c_conveyor)
+          
+        )
       )
+        
+
+
     );
     // Configure the trigger bindings
     configureBindings();

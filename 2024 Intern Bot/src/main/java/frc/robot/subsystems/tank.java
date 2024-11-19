@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import frc.robot.Constants.Ctank;
+
 public class tank extends SubsystemBase {
   /** Creates a new tank. */
   public static Spark left1;
@@ -14,10 +16,10 @@ public class tank extends SubsystemBase {
   public static Spark right1;
   public static Spark right2;
   public tank() {
-    left1 = new Spark(0);
-    left2 = new Spark(1);
-    right1 = new Spark(2);
-    right2 = new Spark(3);
+    left1 = new Spark(Ctank.leftnumber1);
+    left2 = new Spark(Ctank.leftNumber2);
+    right1 = new Spark(Ctank.rightNumber1);
+    right2 = new Spark(Ctank.rightNumber2);
   }
 
   @Override
